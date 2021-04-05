@@ -1,0 +1,48 @@
+﻿@model UniversityRegSystem.Shared.DTOS.DepartmentDTOS.DepartmentDTO
+@{
+    ViewBag.Title = "UpsertDepartment";
+}
+
+<div class="mt-5">
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            @if (Model.Id == 0)
+            {
+                <h2>Add Department</h2>
+            }
+            else
+            {
+                <h2>Edit Department</h2>
+            }
+            <form class="mt-5" method="post">
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                @Html.HiddenFor(m => m.Id)
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name)
+                    @Html.TextBoxFor(m => m.Name, new
+               {
+                   @class = "form-control",
+               })
+                    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mt-5 mb-4">
+                    <button class="btn btn-primary" style="width:100px;height:40px;" type="submit">
+                        <span>Save</span>
+                    </button>
+                    @Html.ActionLink("Cancel", // <-- Link text
+                   "Index", // <-- Action Method Name
+                   null, // <-- Action payload
+                   new { @class = "btn btn-danger", @style = "width:100px;height:40px;" } // <-- htmlArguments
+                   )
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Field Courses</h2>
+
+<div class="row flex mt-5">
+    <div class="col-12 mt-1">
+        <div class="mt-5 mb-4">
+            @Html.ActionLink("Add New Course", // <-- Link text
+           "UpsertFieldCourse", // <-- Action Method Name
+           new { fieldId = ViewBag.fieldId }, // <-- Action payload
+           new { @class = "btn btn-success btn-lg" } // <-- htmlArguments
+           )
+        </div>
+        <br />
+        <div id="table">
+            <table id="tblData" class="table table-bordered mt-5">
+                <thead>
+                    <tr>
+                        <th>
+                            Course Name
+                        </th>
+
+                        <th>
+                            Type Of Course
+                        </th>
+
+                        <th>
+                            Previous Course
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        var dataTable;
+
+        $(document).ready(function () {
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            dataTable = $('#tblData').DataTable({
+                "ajax": {
+                    "url": "/FieldCourse/GetFieldCourses?fieldId=@ViewBag.fieldId"
+                },
+                "columns": [
+                    { "data": "Course.Name", "width": "15%" },
+                    { "data": "TypeOfCourse.Name", "width": "15%" },
+                    {
+                        "data": "Course.PreviousCourse",
+                        "render": function (data) {
+                            if (data) {
+                                return data.Name;
+                            }
+                            return "None";
+                        }, "width": "15%"
+                    },
+                    {
+                        "data": "Id",
+                        "render": function (data) {
+                            return `
+                                <div class="text-center">
+                                    <a href="/FieldCourse/UpsertFieldCourse/?fieldId=@ViewBag.fieldId&id=${data}" class="btn btn-success text-white" style="cursor:pointer">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a onclick=DeleteFieldCourse(${data}) class="btn btn-danger text-white" style="cursor:pointer">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                               `;
+                        }, "width": "40%"
+                    }
+                ]
+            });
+        }
+
+        function DeleteFieldCourse(id) {
+            swal({
+                title: "Are you sure you want to delete section",
+                text: "You can't retrive data after deleted",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            }).then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: `/FieldCourse/DeleteFieldCourse/?id=${id}`,
+                        success: function (data) {
+                            if (data.success) {
+                                toastr.success(data.message);
+                                dataTable.ajax.reload();
+                            } else {
+                                toastr.error(data.message);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+}

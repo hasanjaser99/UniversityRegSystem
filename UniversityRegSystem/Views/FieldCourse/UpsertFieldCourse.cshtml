@@ -1,0 +1,89 @@
+﻿@model UniversityRegSystem.ViewModels.UpsertFieldCourseVM
+@{
+    ViewBag.Title = "UpsertFieldCourse";
+}
+
+<div class="mt-5">
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            @if (Model.FieldCourseDTO.Id == 0)
+            {
+                <h2>Add Course</h2>
+            }
+            else
+            {
+        <h2>Edit Course</h2>
+            }
+        <form class="mt-5" method="post" autocomplete="off">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(m => m.FieldCourseDTO.Id)
+            @Html.HiddenFor(m => m.FieldId)
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FieldCourseDTO.CourseId)
+                @Html.DropDownListFor(m => m.FieldCourseDTO.CourseId, Model.Courses,
+               "-Choose Course-", new
+                    {
+                        @class = "form-control",
+                    })
+
+                @Html.ValidationMessageFor(m => m.FieldCourseDTO.CourseId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FieldCourseDTO.TypeOfCourseId)
+                @Html.DropDownListFor(m => m.FieldCourseDTO.TypeOfCourseId, Model.TypeOfCourses,
+               "-Choose Type Of Course-", new
+                    {
+                        @class = "form-control",
+                    })
+
+                @Html.ValidationMessageFor(m => m.FieldCourseDTO.TypeOfCourseId, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="mt-5 mb-4">
+                <button class="btn btn-primary" style="width:100px;height:40px;" type="submit">
+                    <span>Save</span>
+                </button>
+                @Html.ActionLink("Cancel", // <-- Link text
+               "Index", // <-- Action Method Name
+               new { fieldId = Model.FieldId }, // <-- Action payload
+               new { @class = "btn btn-danger", @style = "width:100px;height:40px;" } // <-- htmlArguments
+               )
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $("#StartTime").timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            minTime: '8',
+            maxTime: '6:00pm',
+            startTime: '8:00',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+
+        $("#EndTime").timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            minTime: '8',
+            maxTime: '6:00pm',
+            startTime: '8:00',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+
+    </script>
+}

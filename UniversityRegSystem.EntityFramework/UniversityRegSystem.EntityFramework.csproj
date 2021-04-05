@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A8B60823-B436-4FF1-8AF2-74724CDB557D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UniversityRegSystem.EntityFramework</RootNamespace>
+    <AssemblyName>UniversityRegSystem.EntityFramework</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.3\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\ApplicationDbContext.cs" />
+    <Compile Include="Data\IdentityModels.cs" />
+    <Compile Include="IdentityConfig.cs" />
+    <Compile Include="Migrations\202103092004245_InitialModels.cs" />
+    <Compile Include="Migrations\202103092004245_InitialModels.Designer.cs">
+      <DependentUpon>202103092004245_InitialModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103161341110_addNumberAndDaysToSection.cs" />
+    <Compile Include="Migrations\202103161341110_addNumberAndDaysToSection.Designer.cs">
+      <DependentUpon>202103161341110_addNumberAndDaysToSection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103181336236_changeStartTimeAndEndTimeToStringInSectionModel.cs" />
+    <Compile Include="Migrations\202103181336236_changeStartTimeAndEndTimeToStringInSectionModel.Designer.cs">
+      <DependentUpon>202103181336236_changeStartTimeAndEndTimeToStringInSectionModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103251159255_addMaxNumberOfStudentsToSectionModel.cs" />
+    <Compile Include="Migrations\202103251159255_addMaxNumberOfStudentsToSectionModel.Designer.cs">
+      <DependentUpon>202103251159255_addMaxNumberOfStudentsToSectionModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103251307144_AddRegisterationTimeModel.cs" />
+    <Compile Include="Migrations\202103251307144_AddRegisterationTimeModel.Designer.cs">
+      <DependentUpon>202103251307144_AddRegisterationTimeModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103311950428_addNumberOfHoursToField.cs" />
+    <Compile Include="Migrations\202103311950428_addNumberOfHoursToField.Designer.cs">
+      <DependentUpon>202103311950428_addNumberOfHoursToField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103312001254_addNumberOfStudentsToSection.cs" />
+    <Compile Include="Migrations\202103312001254_addNumberOfStudentsToSection.Designer.cs">
+      <DependentUpon>202103312001254_addNumberOfStudentsToSection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104011244030_removeTypeOfCoursefromCourse.cs" />
+    <Compile Include="Migrations\202104011244030_removeTypeOfCoursefromCourse.Designer.cs">
+      <DependentUpon>202104011244030_removeTypeOfCoursefromCourse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104011245114_addNumberOfHoursToCourse.cs" />
+    <Compile Include="Migrations\202104011245114_addNumberOfHoursToCourse.Designer.cs">
+      <DependentUpon>202104011245114_addNumberOfHoursToCourse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104011555558_addFieldCoursesModel.cs" />
+    <Compile Include="Migrations\202104011555558_addFieldCoursesModel.Designer.cs">
+      <DependentUpon>202104011555558_addFieldCoursesModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104011603159_addStudentDoneCoursesModel.cs" />
+    <Compile Include="Migrations\202104011603159_addStudentDoneCoursesModel.Designer.cs">
+      <DependentUpon>202104011603159_addStudentDoneCoursesModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104011607289_addStudentRegisterationTimesModel.cs" />
+    <Compile Include="Migrations\202104011607289_addStudentRegisterationTimesModel.Designer.cs">
+      <DependentUpon>202104011607289_addStudentRegisterationTimesModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104011709349_addStudentSectionsModel.cs" />
+    <Compile Include="Migrations\202104011709349_addStudentSectionsModel.Designer.cs">
+      <DependentUpon>202104011709349_addStudentSectionsModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104021449337_changeStudentIdToString.cs" />
+    <Compile Include="Migrations\202104021449337_changeStudentIdToString.Designer.cs">
+      <DependentUpon>202104021449337_changeStudentIdToString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202103092004245_InitialModels.resx">
+      <DependentUpon>202103092004245_InitialModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103161341110_addNumberAndDaysToSection.resx">
+      <DependentUpon>202103161341110_addNumberAndDaysToSection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103181336236_changeStartTimeAndEndTimeToStringInSectionModel.resx">
+      <DependentUpon>202103181336236_changeStartTimeAndEndTimeToStringInSectionModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103251159255_addMaxNumberOfStudentsToSectionModel.resx">
+      <DependentUpon>202103251159255_addMaxNumberOfStudentsToSectionModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103251307144_AddRegisterationTimeModel.resx">
+      <DependentUpon>202103251307144_AddRegisterationTimeModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103311950428_addNumberOfHoursToField.resx">
+      <DependentUpon>202103311950428_addNumberOfHoursToField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103312001254_addNumberOfStudentsToSection.resx">
+      <DependentUpon>202103312001254_addNumberOfStudentsToSection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104011244030_removeTypeOfCoursefromCourse.resx">
+      <DependentUpon>202104011244030_removeTypeOfCoursefromCourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104011245114_addNumberOfHoursToCourse.resx">
+      <DependentUpon>202104011245114_addNumberOfHoursToCourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104011555558_addFieldCoursesModel.resx">
+      <DependentUpon>202104011555558_addFieldCoursesModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104011603159_addStudentDoneCoursesModel.resx">
+      <DependentUpon>202104011603159_addStudentDoneCoursesModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104011607289_addStudentRegisterationTimesModel.resx">
+      <DependentUpon>202104011607289_addStudentRegisterationTimesModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104011709349_addStudentSectionsModel.resx">
+      <DependentUpon>202104011709349_addStudentSectionsModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104021449337_changeStudentIdToString.resx">
+      <DependentUpon>202104021449337_changeStudentIdToString.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UniversityRegSystem.Models\UniversityRegSystem.Models.csproj">
+      <Project>{0180c3d1-0634-48d8-9033-afc25c2c5e71}</Project>
+      <Name>UniversityRegSystem.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

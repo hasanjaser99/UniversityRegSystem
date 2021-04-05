@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Type Of Courses</h2>
+
+<div class="row flex mt-5">
+    <div class="col-12 mt-1">
+        <div class="mt-5 mb-4">
+            @Html.ActionLink("Add New Type Of Course", // <-- Link text
+                 "UpsertTypeOfCourse", // <-- Action Method Name
+                 null, // <-- Action payload
+                 new { @class = "btn btn-success btn-lg" } // <-- htmlArguments
+                )
+        </div>
+        <br />
+        <div id="table">
+            <table id="tblData" class="table table-bordered mt-5">
+                <thead>
+                    <tr>
+                        <th>
+                            Type Of Course Name
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        var dataTable;
+
+        $(document).ready(function () {
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            dataTable = $('#tblData').DataTable({
+                "ajax": {
+                    "url": "/TypeOfCourse/GetTypeOfCourses"
+                },
+                "columns": [
+                    { "data": "Name", "width": "40%" },
+                    {
+                        "data": "Id",
+                        "render": function (data) {
+                            return `
+                            <div class="text-center">
+                                <a href="/TypeOfCourse/UpsertTypeOfCourse/?id=${data}" class="btn btn-success text-white" style="cursor:pointer">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a onclick=DeleteDepartment(${data}) class="btn btn-danger text-white" style="cursor:pointer">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
+                           `;
+                        }, "width": "40%"
+                    }
+                ]
+            });
+        }
+
+        function DeleteDepartment(id) {
+            swal({
+                title: "Are you sure you want to delete type of course",
+                text: "You can't retrive data after deleted",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            }).then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: `/TypeOfCourse/DeleteTypeOfCourse/?id=${id}`,
+                        success: function (data) {
+                            if (data.success) {
+                                toastr.success(data.message);
+                                dataTable.ajax.reload();
+                            } else {
+                                toastr.error(data.message);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+}

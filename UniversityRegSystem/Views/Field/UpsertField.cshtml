@@ -1,0 +1,84 @@
+﻿@model UniversityRegSystem.ViewModels.UpsertFieldVM
+@{
+    ViewBag.Title = "UpsertCourse";
+}
+
+<div class="mt-5">
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            @if (Model.FieldDTO.Id == 0)
+            {
+                <h2>Add Field</h2>
+            }
+            else
+            {
+                <h2>Edit Field</h2>
+            }
+        <form class="mt-5" method="post">
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(m => m.FieldDTO.Id)
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FieldDTO.Name)
+                @Html.TextBoxFor(m => m.FieldDTO.Name, new
+           {
+               @class = "form-control",
+           })
+                @Html.ValidationMessageFor(m => m.FieldDTO.Name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FieldDTO.Name)
+                @Html.TextBoxFor(m => m.FieldDTO.Name, new
+           {
+               @class = "form-control",
+           })
+                @Html.ValidationMessageFor(m => m.FieldDTO.Name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FieldDTO.NumberOfHours)
+                @Html.TextBoxFor(m => m.FieldDTO.NumberOfHours
+           , new
+                {
+                    type = "number",
+                    min = "132",
+                    step = "1",
+                    max = "256",
+               @class = "form-control",
+           })
+
+
+                @Html.ValidationMessageFor(m => m.FieldDTO.NumberOfHours, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FieldDTO.Department)
+                @Html.DropDownListFor(m => m.FieldDTO.DepartmentId, Model.Departments,
+               "-Choose Department-", new
+                    {
+                        @class = "form-control",
+                    })
+
+                @Html.ValidationMessageFor(m => m.FieldDTO.DepartmentId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mt-5 mb-4">
+                <button class="btn btn-primary" style="width:100px;height:40px;" type="submit">
+                    <span>Save</span>
+                </button>
+                @Html.ActionLink("Cancel", // <-- Link text
+               "Index", // <-- Action Method Name
+               null, // <-- Action payload
+               new { @class = "btn btn-danger", @style = "width:100px;height:40px;" } // <-- htmlArguments
+               )
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

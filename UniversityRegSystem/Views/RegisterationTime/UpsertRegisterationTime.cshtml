@@ -1,0 +1,97 @@
+﻿@model UniversityRegSystem.Shared.DTOS.RegisterationTimeDTOS.RegisterationTimeDTO
+@using UniversityRegSystem.Shared.Utility
+@{
+    ViewBag.Title = "UpsertSection";
+}
+
+<div class="mt-5">
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            @if (Model.Id == 0)
+            {
+                <h2>Add RegisterationTime</h2>
+            }
+            else
+            {
+                <h2>Edit RegisterationTime</h2>
+            }
+            <form class="mt-5" method="post" autocomplete="off">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                @Html.HiddenFor(m => m.Id)
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.StartTime)
+                    @Html.TextBoxFor(m => m.StartTime, new
+               {
+                   @class = "form-control",
+                   id = "StartTime"
+               })
+                    @Html.ValidationMessageFor(m => m.StartTime, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.EndTime)
+                    @Html.TextBoxFor(m => m.EndTime, new
+               {
+                   @class = "form-control",
+                   id = "EndTime"
+               })
+                    @Html.ValidationMessageFor(m => m.EndTime, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Day)
+                    @Html.DropDownListFor(m => m.Day, StaticData.Days,
+                   "-Choose Days-", new
+                        {
+                            @class = "form-control",
+                        })
+
+                    @Html.ValidationMessageFor(m => m.Day, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mt-5 mb-4">
+                    <button class="btn btn-primary" style="width:100px;height:40px;" type="submit">
+                        <span>Save</span>
+                    </button>
+                    @Html.ActionLink("Cancel", // <-- Link text
+                   "Index", // <-- Action Method Name
+                   null, // <-- Action payload
+                   new { @class = "btn btn-danger", @style = "width:100px;height:40px;" } // <-- htmlArguments
+                   )
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $("#StartTime").timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            minTime: '8',
+            maxTime: '6:00pm',
+            startTime: '8:00',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+
+        $("#EndTime").timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            minTime: '8',
+            maxTime: '6:00pm',
+            startTime: '8:00',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+
+    </script>
+}

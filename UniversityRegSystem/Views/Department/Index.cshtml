@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Departments</h2>
+
+<div class="row flex mt-5">
+    <div class="col-12 mt-1">
+        <div class="mt-5 mb-4">
+            @Html.ActionLink("Add New Department", // <-- Link text
+                 "UpsertDepartment", // <-- Action Method Name
+                 null, // <-- Action payload
+                 new { @class = "btn btn-success btn-lg" } // <-- htmlArguments
+                )
+        </div>
+        <br />
+        <div id="table">
+            <table id="tblData" class="table table-bordered mt-5">
+                <thead>
+                    <tr>
+                        <th>
+                            Department Name
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        var dataTable;
+
+        $(document).ready(function () {
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            dataTable = $('#tblData').DataTable({
+                "ajax": {
+                    "url": "/Department/GetDepartments"
+                },
+                "columns": [
+                    { "data": "Name", "width": "40%" },
+                    {
+                        "data": "Id",
+                        "render": function (data) {
+                            return `
+                            <div class="text-center">
+                                <a href="/Department/UpsertDepartment/?id=${data}" class="btn btn-success text-white" style="cursor:pointer">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a onclick=DeleteDepartment(${data}) class="btn btn-danger text-white" style="cursor:pointer">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
+                           `;
+                        }, "width": "40%"
+                    }
+                ]
+            });
+        }
+
+        function DeleteDepartment(id) {
+            swal({
+                title: "Are you sure you want to delete department",
+                text: "You can't retrive data after deleted",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            }).then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: `/Department/DeleteDepartment/?id=${id}`,
+                        success: function (data) {
+                            if (data.success) {
+                                toastr.success(data.message);
+                                dataTable.ajax.reload();
+                            } else {
+                                toastr.error(data.message);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+}

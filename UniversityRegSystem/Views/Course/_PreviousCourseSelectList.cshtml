@@ -1,0 +1,8 @@
+﻿@model List<SelectListItem>
+
+<select id="PreviousCourses" class="form-control" onchange="FillPreviousCourse()">
+    @foreach (var item in Model)
+    {
+        <option value="@item.Value" label="@item.Text" selected="@item.Selected"></option>
+    }
+</select>

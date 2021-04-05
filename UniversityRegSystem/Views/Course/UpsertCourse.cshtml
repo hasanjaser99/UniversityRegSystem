@@ -1,0 +1,119 @@
+﻿@model UniversityRegSystem.ViewModels.UpsertCourseVM
+@{
+    ViewBag.Title = "UpsertCourse";
+}
+
+<div class="mt-5">
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            @if (Model.Course.Id == 0)
+            {
+                <h2>Add Course</h2>
+            }
+            else
+            {
+                <h2>Edit Course</h2>
+            }
+            <form class="mt-5" method="post">
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                @Html.HiddenFor(m => m.Course.Id)
+                @Html.HiddenFor(m => m.SelectedField, new { id = "SelectedField" })
+                @Html.HiddenFor(m => m.SelectedPreviousCourse, new { id = "SelectedPreviousCourse" })
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Course.Name)
+                    @Html.TextBoxFor(m => m.Course.Name, new
+               {
+                   @class = "form-control",
+               })
+                    @Html.ValidationMessageFor(m => m.Course.Name, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Department")
+                    @Html.DropDownListFor(m => m.SelectedDepartment, Model.Departments,
+                   "--Select Department--", new
+                   {
+                       @class = "form-control",
+                       @onchange = "PopulateFields()",
+                       id = "Department"
+                   })
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Field")
+                    <div id="fieldsDiv">
+                        @{
+                            Html.RenderPartial("_FieldsSelectList", Model.Fields);
+                        }
+                    </div>
+                    @Html.ValidationMessageFor(m => m.SelectedField, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Previous Course")
+                    <div id="previousCoursesDiv">
+                        @{
+                            Html.RenderPartial("_PreviousCourseSelectList", Model.PreviousCourses);
+                        }
+                    </div>
+                    @Html.ValidationMessageFor(m => m.SelectedPreviousCourse, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mt-5 mb-4">
+                    <button class="btn btn-primary" style="width:100px;height:40px;" type="submit">
+                        <span>Save</span>
+                    </button>
+                    @Html.ActionLink("Cancel", // <-- Link text
+                   "Index", // <-- Action Method Name
+                   null, // <-- Action payload
+                   new { @class = "btn btn-danger", @style = "width:100px;height:40px;" } // <-- htmlArguments
+                   )
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        function PopulateFields() {
+            var department = $('#Department').val();
+            $('#SelectedField').val(null);
+            $.ajax({
+                type: 'GET',
+                cache: false,
+                url: `/Course/PopulateFields/?depId=${department}`,
+                success: function (response) {
+                    $("#fieldsDiv").empty();
+                    $("#fieldsDiv").html(response);
+                }
+            });
+        }
+
+        function FieldChangeHandler() {
+            var field = $('#Fields').val();
+            $('#SelectedField').val(field);
+
+            $.ajax({
+                type: 'GET',
+                cache: false,
+                url: `/Course/PopulatePreviousCourses/?fieldId=${field}`,
+                success: function (response) {
+                    $("#previousCoursesDiv").empty();
+                    $("#previousCoursesDiv").html(response);
+                }
+            });
+        }
+
+        function FillPreviousCourse() {
+            var previousCourse = $('#PreviousCourses').val();
+            $('#SelectedPreviousCourse').val(previousCourse);
+        }
+
+
+    </script>
+
+}

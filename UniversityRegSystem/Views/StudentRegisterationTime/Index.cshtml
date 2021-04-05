@@ -1,0 +1,43 @@
+﻿@model UniversityRegSystem.ViewModels.StudentRegisterationTimesVM
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Registeration Times</h2>
+
+@if (Model.StudentRegisterationTimes.Count() > 0)
+{
+    <p>Student Registeration Times</p>
+    foreach (var item in Model.StudentRegisterationTimes)
+    {
+        <p>@item.RegisterationTime.StartTime - @item.RegisterationTime.EndTime</p>
+    }
+}
+
+<p>All Registeration Times</p>
+
+@foreach (var item in Model.AllRegisterationTimes)
+{
+    <span>@item.StartTime - @item.EndTime </span> <span><button onclick="addRegisterationTime(@item.Id)">Add</button></span>
+}
+
+@section scripts {
+    <script>
+        function addRegisterationTime(id) {
+            $.ajax({
+                type: "POST",
+                url: `/StudentRegisterationTime/AddRegisterationTime/?registerationId=${id}`,
+                success: function (data) {
+                    if (data.success) {
+                        toastr.success(data.message);
+                        window.location.reload();
+                    } else {
+                        toastr.error(data.message);
+                    }
+                }
+            });
+        }
+    </script>
+    }
+
+
