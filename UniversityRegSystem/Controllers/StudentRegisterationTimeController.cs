@@ -50,9 +50,7 @@ namespace UniversityRegSystem.Controllers
 
             if (!response.IsSucsess)
             {
-                ModelState.AddModelError(string.Empty, response.ErrorMessage);
-
-                return Json(new { success = false, message = "Error While Creating Registeration Time" });
+                return Json(new { success = false, message = response.ErrorMessage });
             }
 
             return Json(new { success = true, message = "Registeration Time Created Successfully" });

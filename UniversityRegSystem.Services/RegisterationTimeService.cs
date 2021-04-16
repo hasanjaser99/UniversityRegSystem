@@ -9,6 +9,7 @@ using UniversityRegSystem.Services.Mapper;
 using UniversityRegSystem.Shared.DTOS;
 using UniversityRegSystem.Shared.DTOS.RegisterationTimeDTOS;
 using UniversityRegSystem.Shared.InterfaceServices;
+using UniversityRegSystem.Shared.Utility;
 
 namespace UniversityRegSystem.Services
 {
@@ -135,9 +136,61 @@ namespace UniversityRegSystem.Services
 
             var registerationTimes = _context.RegisterationTimes.Where(r => r.Day == day).ToList();
 
-            var registerationTimesDTO = mapper.Map<List<RegisterationTimeDTO>>(registerationTimes);
+            var filteredRegisterationTimes = Enumerable.Empty<RegisterationTime>();
+
+            foreach (var item in registerationTimes)
+            {
+                if (IsValidTime(item.EndTime))
+                {
+                    filteredRegisterationTimes = filteredRegisterationTimes.Append(item);
+                }
+            }
+
+            var registerationTimesDTO = mapper.Map<List<RegisterationTimeDTO>>(filteredRegisterationTimes);
 
             return registerationTimesDTO;
+        }
+
+        //helpers 
+        public bool IsValidTime(string endTime)
+        {
+            var currentTime = DateTime.Now.ToString("hh:mm tt");
+
+            // Need To Re structure ( 12 am )
+            if(endTime.Contains("PM") && currentTime.Contains("AM"))
+            {
+                return true;
+            }
+
+            if(endTime.Contains("AM") && currentTime.Contains("PM"))
+            {
+                return false;
+            }
+
+            currentTime = StaticFunctions.RemoveTT(currentTime);
+
+            endTime = StaticFunctions.RemoveTT(endTime);
+
+            if (currentTime[0] == '0')
+            {
+                currentTime = currentTime.Substring(1);
+            }
+
+            var currentTimeArray = currentTime.Split(':');
+
+            var startTimeArray = endTime.Split(':');
+
+            var transformedCurrentTime = double.Parse(currentTimeArray[0] + "." + currentTimeArray[1]);
+
+            var transformedtEndTime = Int32.Parse(startTimeArray[0] + "." + startTimeArray[1]);
+
+            if(transformedCurrentTime > transformedtEndTime)
+            {
+                return true;
+            }
+
+            return false;
+
         }
 
     }

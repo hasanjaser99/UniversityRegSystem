@@ -12,5 +12,7 @@ namespace UniversityRegSystem.Shared.InterfaceServices
         Task<BaseResult> RemoveRegisterationTime(string studentId, int registerationId);
 
         List<StudentRegisterationTimeDTO> GetAllRegisterationTimes(string studentId, string includeProperities = null);
+
+        List<StudentRegisterationTimeDTO> GetAllRegisterationTimesByTime(string studentId, string includeProperities = null);
     }
 }

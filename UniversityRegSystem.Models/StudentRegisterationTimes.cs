@@ -24,6 +24,6 @@ namespace UniversityRegSystem.Models
         [ForeignKey("RegisterationTimeId")]
         public RegisterationTime RegisterationTime { get; set; }
 
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
     }
 }
