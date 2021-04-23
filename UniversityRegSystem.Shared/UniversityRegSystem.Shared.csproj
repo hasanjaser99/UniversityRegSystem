@@ -107,6 +107,7 @@
     <Compile Include="Responses\Course\CourseResponse.cs" />
     <Compile Include="Responses\Course\ListOfCoursesResponse.cs" />
     <Compile Include="Utility\StaticData.cs" />
+    <Compile Include="Utility\StaticFunctions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

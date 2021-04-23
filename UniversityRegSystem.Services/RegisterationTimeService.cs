@@ -182,9 +182,9 @@ namespace UniversityRegSystem.Services
 
             var transformedCurrentTime = double.Parse(currentTimeArray[0] + "." + currentTimeArray[1]);
 
-            var transformedtEndTime = Int32.Parse(startTimeArray[0] + "." + startTimeArray[1]);
+            var transformedtEndTime = double.Parse(startTimeArray[0] + "." + startTimeArray[1]);
 
-            if(transformedCurrentTime > transformedtEndTime)
+            if(transformedCurrentTime < transformedtEndTime)
             {
                 return true;
             }
