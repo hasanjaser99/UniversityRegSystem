@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using UniversityRegSystem.Shared.Utility
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    @RenderSection("styles", required: false)
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -24,25 +26,34 @@
             </div>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Management
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Type Of Courses", "Index", "TypeOfCourse")</li>
-                            <li>@Html.ActionLink("Departments", "Index", "Department")</li>
-                            <li>@Html.ActionLink("Fields", "Index", "Field")</li>
-                            <li>@Html.ActionLink("Teachers", "Index", "Teacher")</li>
-                            <li>@Html.ActionLink("Courses", "Index", "Course")</li>
-                            <li>@Html.ActionLink("Students", "Index", "Student")</li>
-                            <li>@Html.ActionLink("Registertation Times", "Index", "RegisterationTime")</li>
-                        </ul>
-                    </li>
-                    <li>@Html.ActionLink("Registertation Times", "Index", "StudentRegisterationTime")</li>
+                    @if (User.IsInRole(StaticData.Role_Admin))
+                    {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Management
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Type Of Courses", "Index", "TypeOfCourse")</li>
+                                <li>@Html.ActionLink("Departments", "Index", "Department")</li>
+                                <li>@Html.ActionLink("Fields", "Index", "Field")</li>
+                                <li>@Html.ActionLink("Teachers", "Index", "Teacher")</li>
+                                <li>@Html.ActionLink("Courses", "Index", "Course")</li>
+                                <li>@Html.ActionLink("Students", "Index", "Student")</li>
+                                <li>@Html.ActionLink("Registertation Times", "Index", "RegisterationTime")</li>
+                            </ul>
+                        </li>
+                    }
+
+                    @if (User.IsInRole(StaticData.Role_Student))
+                    {
+                        <li>@Html.ActionLink("Registertation Times", "Index", "StudentRegisterationTime")</li>
+
+                        <li>@Html.ActionLink("Registertation", "Index", "Registeration")</li>
+
+                        <li>@Html.ActionLink("My Schedule", "Index", "StudentSections")</li>
+                    }
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

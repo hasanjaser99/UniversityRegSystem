@@ -4,10 +4,12 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using UniversityRegSystem.Shared.DTOS.StudentDTOS;
 using UniversityRegSystem.Shared.InterfaceServices;
+using UniversityRegSystem.Shared.Utility;
 using UniversityRegSystem.ViewModels;
 
 namespace UniversityRegSystem.Controllers
 {
+    [Authorize(Roles = StaticData.Role_Admin)]
     public class StudentController : Controller
     {
         private readonly IStudentService _studentService;

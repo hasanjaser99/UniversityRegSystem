@@ -1,9 +1,11 @@
 ﻿using System.Web.Mvc;
 using UniversityRegSystem.Shared.DTOS.DepartmentDTOS;
 using UniversityRegSystem.Shared.InterfaceServices;
+using UniversityRegSystem.Shared.Utility;
 
 namespace UniversityRegSystem.Controllers
 {
+    [Authorize(Roles = StaticData.Role_Admin)]
     public class DepartmentController : Controller
     {
         private readonly IDepartmentService _service;

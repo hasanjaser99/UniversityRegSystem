@@ -9,6 +9,7 @@ using UniversityRegSystem.ViewModels;
 
 namespace UniversityRegSystem.Controllers
 {
+    [Authorize(Roles = StaticData.Role_Admin)]
     public class SectionController : Controller
     {
         private readonly ISectionService _sectionService;

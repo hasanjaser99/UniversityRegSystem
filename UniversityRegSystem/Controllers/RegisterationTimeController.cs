@@ -2,9 +2,11 @@
 using System.Web.Mvc;
 using UniversityRegSystem.Shared.DTOS.RegisterationTimeDTOS;
 using UniversityRegSystem.Shared.InterfaceServices;
+using UniversityRegSystem.Shared.Utility;
 
 namespace UniversityRegSystem.Controllers
 {
+    [Authorize(Roles = StaticData.Role_Admin)]
     public class RegisterationTimeController : Controller
     {
         private readonly IRegisterationTimeService _service;

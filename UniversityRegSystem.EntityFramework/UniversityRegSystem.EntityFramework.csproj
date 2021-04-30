@@ -138,6 +138,10 @@
     <Compile Include="Migrations\202104131746161_changeDateFromDateTimeToStringInStudentRegisterationTimesModel.Designer.cs">
       <DependentUpon>202104131746161_changeDateFromDateTimeToStringInStudentRegisterationTimesModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104231825288_EditManyToManyModelsKey.cs" />
+    <Compile Include="Migrations\202104231825288_EditManyToManyModelsKey.Designer.cs">
+      <DependentUpon>202104231825288_EditManyToManyModelsKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -186,6 +190,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104131746161_changeDateFromDateTimeToStringInStudentRegisterationTimesModel.resx">
       <DependentUpon>202104131746161_changeDateFromDateTimeToStringInStudentRegisterationTimesModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104231825288_EditManyToManyModelsKey.resx">
+      <DependentUpon>202104231825288_EditManyToManyModelsKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

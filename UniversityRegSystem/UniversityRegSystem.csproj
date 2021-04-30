@@ -188,6 +188,7 @@
     <Compile Include="Controllers\StudentRegisterationTimeController.cs" />
     <Compile Include="Controllers\SectionController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\StudentSectionsController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Controllers\FieldController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
@@ -245,7 +246,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
@@ -292,10 +292,12 @@
     <Content Include="Views\FieldCourse\Index.cshtml" />
     <Content Include="Views\FieldCourse\UpsertFieldCourse.cshtml" />
     <Content Include="Views\StudentRegisterationTime\Index.cshtml" />
+    <Content Include="Views\Registeration\Index.cshtml" />
+    <Content Include="Views\_RegisterationPartial.cshtml" />
+    <Content Include="Views\StudentSections\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Registeration\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

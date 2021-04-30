@@ -1,0 +1,96 @@
+﻿@using UniversityRegSystem.Shared.DTOS
+@model List<StudentSectionsDTO>
+
+<h2>Registeration</h2>
+
+<div class="row flex mt-5">
+    <div class="col-12 mt-1">
+        <div id="table">
+            <table id="tblData" class="table table-bordered mt-5">
+                <thead>
+                    <tr>
+                        <th>
+                            Course Name
+                        </th>
+
+                        <th>
+                            Days
+                        </th>
+
+                        <th>
+                            Start Time
+                        </th>
+
+                        <th>
+                            End Time
+                        </th>
+
+                        <th>
+                            Teacher Name
+                        </th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+@if (Model.Count > 0)
+{
+    <h2>Registered Courses</h2>
+    <div class="row flex mt-5">
+        <div class="col-12 mt-1">
+            <div id="table">
+                <table id="tblData" class="table table-bordered mt-5">
+                    <thead>
+                        <tr>
+                            <th>
+                                Course Name
+                            </th>
+
+                            <th>
+                                Days
+                            </th>
+
+                            <th>
+                                Start Time
+                            </th>
+
+                            <th>
+                                End Time
+                            </th>
+
+                            <th>
+                                Teacher Name
+                            </th>
+
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var studentSection in Model)
+                        {
+                            <tr id="@studentSection.SectionId">
+                                <td>@studentSection.CourseName</td>
+                                <td>@studentSection.Days</td>
+                                <td>@studentSection.StartTime</td>
+                                <td>@studentSection.EndTime</td>
+                                <td>@studentSection.TeacherName</td>
+                                <td>
+                                    <div class="text-center">
+                                        <button class="btn btn-danger text-white" style="cursor:pointer" onclick="RemoveCourse('@studentSection.SectionId')">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+

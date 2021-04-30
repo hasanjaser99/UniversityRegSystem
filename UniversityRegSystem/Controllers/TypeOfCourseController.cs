@@ -2,9 +2,11 @@
 using System.Web.Mvc;
 using UniversityRegSystem.Shared.DTOS.TypeOfCourseDTOS;
 using UniversityRegSystem.Shared.InterfaceServices;
+using UniversityRegSystem.Shared.Utility;
 
 namespace UniversityRegSystem.Controllers
 {
+    [Authorize(Roles = StaticData.Role_Admin)]
     public class TypeOfCourseController : Controller
     {
         private readonly ITypeOfCourseService _service;

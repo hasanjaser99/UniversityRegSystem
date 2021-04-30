@@ -1,0 +1,116 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
+}
+
+@section styles {
+    <style>
+        .swal-button.swal-button--confirm {
+            background-color: #5cb85c
+        }
+
+        .swal-button--confirm.swal-button:not([disabled]):hover {
+            background-color: #5cb85c
+        }
+    </style>
+}
+
+<div id="content">
+</div>
+
+@section scripts {
+    <script>
+        var dataTable;
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "/Registeration/CheckRegisteration",
+                success: function (data) {
+                    if (!data.ErrorMessage) {
+                        console.log(data);
+                        $("#content").html(data);
+                        loadDataTable();
+                    } else {
+                        swal("Error", `${data.ErrorMessage}`, "error");
+                    }
+                }
+            });
+
+        });
+
+        function loadDataTable() {
+            dataTable = $('#tblData').DataTable({
+                "ajax": {
+                    "url": "/Registeration/GetFieldSections"
+                },
+                "columns": [
+
+                    { "data": "Name", "width": "15%" },
+                    { "data": "Days", "width": "15%" },
+                    { "data": "StartTime", "width": "15%" },
+                    { "data": "EndTime", "width": "15%" },
+                    { "data": "TeacherName", "width": "15%" },
+                    {
+                        "data": null,
+                        "render": function (data) {
+                            return `
+                                    <div class="text-center">
+                                        <button class="btn btn-success text-white" style="cursor:pointer" onclick="RegisterCourse('${data.CourseId}','${data.SectionId}')">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                   `;
+                        }, "width": "20%"
+                    },
+                ]
+            });
+        }
+
+        function RegisterCourse(courseId, sectionId) {
+            swal({
+                title: "Are you sure you want to register this course",
+                icon: "info",
+                buttons: ["Cancel","Register"],
+            }).then((value) => {
+                if (value) {
+                    $.ajax({
+                        type: "POST",
+                        url: `/Registeration/RegisterCourse/?courseId=${courseId}&sectionId=${sectionId}`,
+                        success: function (data) {
+                            if (data.success) {
+                                window.location.reload();
+                            } else {
+                                swal("Error", `${data.message}`, "error");
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        function RemoveCourse(sectionId) {
+            swal({
+                title: "Are you sure you want to un register this course",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            }).then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: `/Registeration/DeleteCourse/?sectionId=${sectionId}`,
+                        success: function (data) {
+                            if (data.success) {
+                                toastr.success(data.message);
+                                $(`#${sectionId}`).remove();
+                            } else {
+                                toastr.error(data.message);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+}

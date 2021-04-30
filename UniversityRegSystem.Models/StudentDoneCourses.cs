@@ -11,14 +11,13 @@ namespace UniversityRegSystem.Models
     public class StudentDoneCourses
     {
         [Key]
-        [Column(Order = 1)]
+        public int Id { get; set; }
+
         public string StudentId { get; set; }
 
         [ForeignKey("StudentId")]
         public Student Student { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
         public int CourseId { get; set; }
 
         [ForeignKey("CourseId")]

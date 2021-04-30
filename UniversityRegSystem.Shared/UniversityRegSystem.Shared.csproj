@@ -76,6 +76,7 @@
     <Compile Include="DTOS\FieldDTOS\UpdateFieldDTO.cs" />
     <Compile Include="DTOS\FieldDTOS\AddFieldDTO.cs" />
     <Compile Include="DTOS\FieldDTOS\FieldDTO.cs" />
+    <Compile Include="DTOS\RegisterationSectionDTO.cs" />
     <Compile Include="DTOS\RegisterationTimeDTOS\UpdateRegisterationTimeDTO.cs" />
     <Compile Include="DTOS\RegisterationTimeDTOS\AddRegisterationTimeDTO.cs" />
     <Compile Include="DTOS\RegisterationTimeDTOS\RegisterationTimeDTO.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="DTOS\StudentDTOS\StudentDTO.cs" />
     <Compile Include="DTOS\StudentRegisterationTimeDTOS\AddStudentRegisterationTimeDTO.cs" />
     <Compile Include="DTOS\StudentRegisterationTimeDTOS\StudentRegisterationTimeDTO.cs" />
+    <Compile Include="DTOS\StudentSectionsDTO.cs" />
     <Compile Include="DTOS\TeacherDTOS\UpdateTeacherDTO.cs" />
     <Compile Include="DTOS\TeacherDTOS\AddTeacherDTO.cs" />
     <Compile Include="DTOS\TeacherDTOS\TeacherDTO.cs" />
@@ -94,8 +96,10 @@
     <Compile Include="DTOS\TypeOfCourseDTOS\AddTypeOfCourseDTO.cs" />
     <Compile Include="DTOS\TypeOfCourseDTOS\TypeOfCourseDTO.cs" />
     <Compile Include="InterfaceServices\IFieldCourseService.cs" />
+    <Compile Include="InterfaceServices\IRegisterationService.cs" />
     <Compile Include="InterfaceServices\IStudentRegisterationTimeService.cs" />
     <Compile Include="InterfaceServices\ISectionService.cs" />
+    <Compile Include="InterfaceServices\IStudentSectionsSerivce.cs" />
     <Compile Include="InterfaceServices\IStudentService.cs" />
     <Compile Include="InterfaceServices\ITeacherService.cs" />
     <Compile Include="InterfaceServices\IFieldService.cs" />
@@ -104,13 +108,14 @@
     <Compile Include="InterfaceServices\ITypeOfCourseService.cs" />
     <Compile Include="InterfaceServices\ICourseService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Responses\Course\CourseResponse.cs" />
-    <Compile Include="Responses\Course\ListOfCoursesResponse.cs" />
     <Compile Include="Utility\StaticData.cs" />
     <Compile Include="Utility\StaticFunctions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Responses\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

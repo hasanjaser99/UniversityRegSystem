@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using UniversityRegSystem.Shared.DTOS;
+using UniversityRegSystem.Shared.DTOS.FieldDTOS;
 using UniversityRegSystem.Shared.DTOS.StudentDTOS;
 
 namespace UniversityRegSystem.Shared.InterfaceServices
@@ -16,5 +17,7 @@ namespace UniversityRegSystem.Shared.InterfaceServices
         StudentDTO GetStudentById(string id, string includeProperities = null);
 
         List<StudentDTO> GetAllStudents(string includeProperities = null);
+
+        FieldDTO GetStudentField(string studentId, string includeProperities = null);
     }
 }

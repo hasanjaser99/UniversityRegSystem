@@ -6,9 +6,11 @@ using UniversityRegSystem.Shared.InterfaceServices;
 using UniversityRegSystem.ViewModels;
 using Microsoft.AspNet.Identity;
 using UniversityRegSystem.Shared.DTOS.StudentRegisterationTimeDTOS;
+using UniversityRegSystem.Shared.Utility;
 
 namespace UniversityRegSystem.Controllers
 {
+    [Authorize(Roles = StaticData.Role_Student)]
     public class StudentRegisterationTimeController : Controller
     {
         private readonly IStudentRegisterationTimeService _sRegService;

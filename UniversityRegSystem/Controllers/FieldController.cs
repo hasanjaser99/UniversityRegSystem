@@ -4,10 +4,12 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using UniversityRegSystem.Shared.DTOS.FieldDTOS;
 using UniversityRegSystem.Shared.InterfaceServices;
+using UniversityRegSystem.Shared.Utility;
 using UniversityRegSystem.ViewModels;
 
 namespace UniversityRegSystem.Controllers
 {
+    [Authorize(Roles = StaticData.Role_Admin)]
     public class FieldController : Controller
     {
         private readonly IFieldService _fieldService;

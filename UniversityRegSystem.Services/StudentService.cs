@@ -11,6 +11,7 @@ using UniversityRegSystem.EntityFramework.Data;
 using UniversityRegSystem.Models;
 using UniversityRegSystem.Services.Mapper;
 using UniversityRegSystem.Shared.DTOS;
+using UniversityRegSystem.Shared.DTOS.FieldDTOS;
 using UniversityRegSystem.Shared.DTOS.StudentDTOS;
 using UniversityRegSystem.Shared.InterfaceServices;
 using UniversityRegSystem.Shared.Utility;
@@ -197,6 +198,24 @@ namespace UniversityRegSystem.Services
                 result.ErrorMessage = "Internal Server Error";
                 return result;
             }
+        }
+
+        public FieldDTO GetStudentField(string studentId, string includeProperities = null)
+        {
+            IQueryable<Student> query = dbSet;
+
+            query = query.Where(c => c.StudentId == studentId);
+
+            if (includeProperities != null)
+            {
+                query = HelperService<Student>.IncludeProps(includeProperities, query);
+            }
+
+            var student = query.FirstOrDefault();
+
+            var fieldDTO = mapper.Map<FieldDTO>(student.Field);
+
+            return fieldDTO;
         }
 
     }

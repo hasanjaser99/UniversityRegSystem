@@ -34,8 +34,10 @@ namespace UniversityRegSystem.Services
             BaseResult result = new BaseResult();
             try
             {
+                var currentDate = DateTime.Now.ToString("dd/MM/yyyy");
+
                 var studentRegisterationTime = _context.StudentRegisterationTimes
-                    .FirstOrDefault(a => a.RegisterationTimeId == Model.RegisterationTimeId);
+                    .FirstOrDefault(a => a.RegisterationTimeId == Model.RegisterationTimeId && a.Date == currentDate);
 
                 if(studentRegisterationTime != null)
                 {
@@ -49,7 +51,7 @@ namespace UniversityRegSystem.Services
                 {
                     StudentId = Model.StudentId,
                     RegisterationTimeId = Model.RegisterationTimeId,
-                    Date = DateTime.Now.ToString("dd/MM/yyyy"),
+                    Date = currentDate,
                 };
 
                 _context.StudentRegisterationTimes.Add(studentRegisterationTime);

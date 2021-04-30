@@ -25,6 +25,8 @@ namespace UniversityRegSystem
             container.RegisterType<IRegisterationTimeService, RegisterationTimeService>();
             container.RegisterType<IFieldCourseService, FieldCourseService>();
             container.RegisterType<IStudentRegisterationTimeService, StudentRegisterationTimeService>();
+            container.RegisterType<IRegisterationService, RegisterationService>();
+            container.RegisterType<IStudentSectionsSerivce, StudentSectionsSerivce>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
